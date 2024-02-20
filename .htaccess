@@ -6,10 +6,10 @@
     RewriteEngine On
 
     #we create this code to deny access from env file
-    <files .env>
-        Order allow.deny   
+    <Files .env>
+        Order allow,deny   
         Deny from all
-    </files>
+    </Files>
 
 
     # Handle Authorization Header
