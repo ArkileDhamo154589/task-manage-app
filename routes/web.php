@@ -1,18 +1,24 @@
 <?php
 
+use App\Http\Controllers\DepartmentsController;
 use Illuminate\Support\Facades\Route;
+//Import Controller
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsersController;
+
+
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| we create route using controller , [we declare controller using [] ] we also put ::class and we call the function dashboard
+| We create a route get (because we want a movement).we will give a name tou our route , everything that we will change the name ill be unique
+| 
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/' , [HomeController::class, 'dashboard']);
+Route::get('departments/index' , [DepartmentsController::class, 'index'])->name('departmentsIndex');
+Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
