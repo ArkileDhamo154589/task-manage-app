@@ -84,7 +84,14 @@
             </div>
           </div>
         </nav>
-
+        {{-- Here is a way how to display error messages(i do not prefer this but is step by step) --}}
+        @if($errors->any())
+            @foreach($errors->all() as $err)
+                <p class="text-danger"> 
+                    {{$err}}
+                </p>
+            @endforeach
+        @endif
         <!-- Remove this content and add yieldar this will allow us to add different content in every page!-->
         @yield('content') 
 		</div>
