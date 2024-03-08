@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Department;
+use Illuminate\Support\Facades\Session;
 
 class DepartmentsController extends Controller
 {
@@ -36,7 +37,7 @@ class DepartmentsController extends Controller
                 'director_id' => $request->director_id,
                 'name' => $request->name,
             ]);
-
+            Session::flash('success-message' , 'Department Created Successfully!!');
             return redirect('/');
         }
         //we take the id from the url 
@@ -48,11 +49,16 @@ class DepartmentsController extends Controller
         }
         public function update(Request $request, $id)
         {
+            $request->validate([
+                'name' => ['required'],
+                'director_id' => ['required']
+            ]);
             //we updte the director id and name
             Department::where('id', $id)->update([
                 'director_id' => $request->director_id,
                 'name' => $request->name,
             ]);
+            Session::flash('success-message' , 'Department Updated Successfully!!');
             return redirect()->route('departmentsIndex');
         }
         public function delete(Request $request, $id)
@@ -62,6 +68,7 @@ class DepartmentsController extends Controller
                 'director_id' => $request->director_id,
                 'name' => $request->name,
             ]);
+            Session::flash('success-message' , 'Department Deleted Successfully!!');
             return redirect()->route('departmentsIndex');
         }
 }

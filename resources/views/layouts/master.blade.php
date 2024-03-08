@@ -92,6 +92,12 @@
                 </p>
             @endforeach
         @endif
+
+        @if(Session::has('success-message'))
+                <p class="text-success">
+                    {{Session::get('success-message')}}
+                </p>
+        @endif
         <!-- Remove this content and add yieldar this will allow us to add different content in every page!-->
         @yield('content') 
 		</div>
