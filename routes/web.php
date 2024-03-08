@@ -25,6 +25,7 @@ Route::get('departments/create' ,[DepartmentsController::class , 'create'])->nam
 Route::post('departments/store' ,[DepartmentsController::class , 'store'])->name('departmentsStore');
 //we create the route for edit (with {id}) we declare the id of the department or anything that we edit
 Route::get('departments/edit/{id}' ,[DepartmentsController::class , 'edit'])->name('departmentsEdit');
+Route::post('departments/update/{id}' ,[DepartmentsController::class , 'update'])->name('departmentsUpdate');
 
 Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
 

@@ -35,7 +35,17 @@ class DepartmentsController extends Controller
     }
     //we take the id from the url 
     public function edit($id){
-        //check if we take it
-        return $id;
+        $department = Department::find($id);
+
+        return view('managment.departments.edit' , compact('department'));
+    }
+    public function update(Request $request ,$id)
+    {
+        //we updte the director id and name
+        Department::where('id' , $id)->update([
+            'director_id' => $request->director_id,
+            'name' => $request->name,
+        ]);
+        return redirect()->route('departmentsIndex');
     }
 }
