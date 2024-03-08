@@ -1,43 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Sidebar 01</title>
+
+<head>
+    <title>Sidebar 01</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!-- adding here the correct path for style using asset laravel -->
-        <link rel="stylesheet" href="{{ asset('public/sidebar/css/style.css')}}">
-  </head>
-  <body>
-		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
-	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Managment</a>
-	            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="{{route ('departmentsIndex') }}">Departments</a>
-                </li>
-                <li>
-                    <a href="{{route ('usersIndex') }}">Users</a>
-                </li>
-                <li>
-                    <a href="#">Roles</a>
-                </li>
-                <li>
-                  <a href="#">Permisions</a>
-              </li>
-	            </ul>
-	          </li>
-            <li>
-              <a href="#">Task Inbox</a>
-          </li>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('/sidebar/css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Management</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="{{ route('departmentsIndex') }}">Departments</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('usersIndex') }}">Users</a>
+                            </li>
+                            <li>
+                                <a href="#">Roles</a>
+                            </li>
+                            <li>
+                                <a href="#">Permissions</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Tasks Inbox</a>
+                    </li>
+                </ul>
           
 	        <div class="footer">
 	        	<p class="display:none;"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -85,9 +89,9 @@
         @yield('content') 
 		</div>
 
-    <script src="{{ asset('public/sidebar/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('public/sidebar/js/popper.js')}}"></script>
-    <script src="{{ asset('public/sidebar/js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('public/sidebar/js/main.js') }}"></script>
+    <script src="{{ asset('/sidebar/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/sidebar/js/popper.js')}}"></script>
+    <script src="{{ asset('/sidebar/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('/sidebar/js/main.js') }}"></script>
   </body>
 </html>

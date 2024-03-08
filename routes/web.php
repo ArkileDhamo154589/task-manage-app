@@ -21,4 +21,7 @@ use App\Http\Controllers\UsersController;
 
 Route::get('/' , [HomeController::class, 'dashboard']);
 Route::get('departments/index' , [DepartmentsController::class, 'index'])->name('departmentsIndex');
+Route::get('departments/create' ,[DepartmentsController::class , 'create'])->name('departmentsCreate');
+Route::post('departments/store' ,[DepartmentsController::class , 'store'])->name('departmentsStore');
 Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
+
