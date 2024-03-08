@@ -48,4 +48,13 @@ class DepartmentsController extends Controller
         ]);
         return redirect()->route('departmentsIndex');
     }
+    public function delete(Request $request , $id){
+
+        Department::where('id' , $id)->delete([
+            'director_id' => $request->director_id,
+            'name' => $request->name,
+        ]);
+        return redirect()->route('departmentsIndex');
+
+    }
 }

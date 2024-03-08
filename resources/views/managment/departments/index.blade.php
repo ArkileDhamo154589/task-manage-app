@@ -31,9 +31,19 @@
                         <td>{{$dep->name}}</td>
                         <td>{{$dep->director_id}}</td>
                         <td>
-                            <a href="{{route('departmentsEdit' , $dep->id)}}" class="btn btn-submit">
-                                <i class="fa fa-edit"></i>
-                            </a>
+                            <div class="float-left mx-1">
+                                <a href="{{route('departmentsEdit' , $dep->id)}}" class="btn btn-submit">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </div>
+                            <div class="float-left mx-1">
+                                <form action="{{route('departmentsDelete', $dep->id)}}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
