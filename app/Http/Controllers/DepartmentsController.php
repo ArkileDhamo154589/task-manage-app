@@ -33,4 +33,9 @@ class DepartmentsController extends Controller
 
         return redirect('/');
     }
+    //we take the id from the url 
+    public function edit($id){
+        //check if we take it
+        return $id;
+    }
 }
