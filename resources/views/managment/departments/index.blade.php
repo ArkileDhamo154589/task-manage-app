@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="row">
+<Departments />
+
+    {{-- <div class="row">
         <div class="col-md-6">
             <h1>Departments</h1>
         </div>
@@ -10,8 +12,8 @@
                 Create New Department
             </a>
         </div>
-    </div>
-   <div class="row">
+    </div> --}}
+   {{-- <div class="row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table table-hover">
@@ -26,7 +28,6 @@
                 <tbody>
                     @foreach($departments as $dep)
                     <tr>
-                        {{-- every time that we start a loop in laravel we get $loop->index --}}
                         <td>{{$loop->index + 1}}</td>
                         <td>{{$dep->name}}</td>
                         <td>{{$dep->director_id}}</td>
@@ -52,5 +53,5 @@
             </table>
         </div>
     </div>
-   </div>
+   </div> --}}
 @endsection
