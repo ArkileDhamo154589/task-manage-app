@@ -16,7 +16,8 @@
 
 <body>
 
-    <div class="wrapper d-flex align-items-stretch">
+    <div class="wrapper d-flex align-items-stretch" id="app">
+        <!-- We declare the id app (we have the app.mount('#app') in app.js) -->
         <nav id="sidebar">
             <div class="p-4 pt-5">
                 <a href="#" class="img logo rounded-circle mb-5">
