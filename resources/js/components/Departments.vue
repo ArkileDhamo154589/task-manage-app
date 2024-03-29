@@ -8,6 +8,27 @@
                <button class="btn btn-success float-end" @click="createDepartment"> Create new Department</button>
             </div>
             <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Director</th>
+                                    <th>Actions</th>
+                                </tr>
+                        </thead>
+                            <tbody>
+                                <tr v-for="(department, index) in departments" :key="index">
+                                    <td>{{index + 1}}</td>
+                                    <td>{{department.name}}</td>
+                                    <td>{{department.director_id}}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+
                <!-- Modal -->
                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
@@ -52,6 +73,7 @@
    export default {
        data() {
            return {
+            departments: {},
             //we put our data in object
              departmentData : {
                 name: '',
@@ -60,18 +82,26 @@
            }
        },
        methods: {
-        //in methods we create our function
+            getDepartments(){
+                axios.get(`${window.url}api/getDepartments`).then((response) =>{
+                    console.log(response.data)
+                    this.departments = response.data
+                })
+            },
            createDepartment(){
-            //here on click @click we show our modal
+            this.departmentData.name = this.departmentData.direcotr_id = ''
               $('#exampleModal').modal('show')
            },
-           //here is the function to store data , for the momment we console log the data (working)
            storeDepartment(){
-                console.log(this.departmentData)
+                axios.post(window.url + 'api/storeDepartment' , this.departmentData)
+                    .then((response) => {
+                        $('#exampleModal').modal('hide')
+                    });
            },
        },
        mounted() {
-          
+        //we bring this every time that our page reload
+          this.getDepartments()
        },
    }
 </script>

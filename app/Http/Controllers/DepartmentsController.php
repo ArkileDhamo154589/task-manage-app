@@ -9,6 +9,27 @@ use Illuminate\Support\Facades\Session;
 
 class DepartmentsController extends Controller
 {
+    // bellow is related to vue js crud
+
+    public function getDepartments()
+    {
+        //with this we bring the latests
+        return response()->json(Department::latest()->get());
+    }
+
+
+    public function storeDepartment(Request $request){
+        //we need our model
+        Department::create([
+            'user_id' => 1,
+            'director_id' => $request->director_id,
+            'name' => $request->name,
+        ]);
+
+        return response()->json('success');
+    }
+
+    // bellow code is related to laravel crud
     public function index()
     {
         // all is a laravel function - it returns all the data of the model departments
