@@ -49,6 +49,9 @@
                                  <div class="form-group">
                                     <label for="name"> Name </label>
                                     <input type="text" class="form-control" name="name" v-model="departmentData.name">
+                                    <p class="text-danger" v-if="departmentErrors.name">
+                                       Name is Required 
+                                    </p>
                                  </div>
                               </div>
                               <div class="col-md-6">
@@ -59,6 +62,9 @@
                                        <option value="1"> IT DIRECTOR </option>
                                        <option value="2"> HR DIRECTOR </option>
                                     </select>
+                                    <p class="text-danger" v-if="departmentErrors.direcotr_id">
+                                       Director is Required 
+                                    </p>
                                  </div>
                               </div>
                            </div>
@@ -86,7 +92,13 @@
                 id: '',
                 name: '',
                 director_id: '',
-             }
+             },
+             //validation 
+             departmentErrors : {
+                name: false,
+                director_id: false,
+             },
+
            }
        },
        methods: {
@@ -111,20 +123,31 @@
            },
            
            storeDepartment(){
-                axios.post(window.url + 'api/storeDepartment' , this.departmentData)
-                    .then((response) => {
-                        this.getDepartments()
-                        $('#exampleModal').modal('hide')
-                    });
-           },
+               // Check if the fields are empty
+               this.departmentErrors.name = !this.departmentData.name
+               this.departmentErrors.direcotr_id = !this.departmentData.direcotr_id
+               
+               if(!this.departmentErrors.name && !this.departmentErrors.direcotr_id){
+                  axios.post(window.url + 'api/storeDepartment' , this.departmentData)
+                        .then((response) => {
+                           this.getDepartments()
+                           $('#exampleModal').modal('hide')
+                        });
+               }
+            },
            updateDepartment() {
             // we put / because after url need it for the id
-            axios.post(window.url + 'api/updateDepartment/' + this.departmentData.id, this.departmentData)
-            .then((response) => {
-               //we call getDepartments function because we need to see the updated changes
-               this.getDepartments()
-               $('#exampleModal').modal('hide');
-            });
+            this.departmentErrors.name = !this.departmentData.name
+               this.departmentErrors.direcotr_id = !this.departmentData.direcotr_id
+               
+               if(!this.departmentErrors.name && !this.departmentErrors.direcotr_id){
+                     axios.post(window.url + 'api/updateDepartment/' + this.departmentData.id, this.departmentData)
+                     .then((response) => {
+                        //we call getDepartments function because we need to see the updated changes
+                        this.getDepartments()
+                        $('#exampleModal').modal('hide');
+                     });
+               }
          },
          deleteDepartment(department){
             if(confirm('Are you sure you want to delete department!!?')){
