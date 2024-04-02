@@ -20,6 +20,10 @@ class DepartmentsController extends Controller
 
     public function storeDepartment(Request $request)
     {
+        $request->validate([
+            'name' => ['required'],
+            'director_id' => ['required']
+        ]);
         //we need our model
         Department::create([
             'user_id' => 1,
@@ -32,6 +36,10 @@ class DepartmentsController extends Controller
 
     public function updateDepartment(Request $request, $id)
     {
+        $request->validate([
+            'name' => ['required'],
+            'director_id' => ['required']
+        ]);
         //we need to update it based on id
         Department::where('id', $id)->update([
             'director_id' => $request->director_id,

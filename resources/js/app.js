@@ -9,6 +9,13 @@ import {createApp} from 'vue'
 //Import Departments component
 
 import Departments from './components/Departments.vue';
+
+//import v-form 
+import Form from 'vform';
+window.Form = Form;
+
+
+
 const app = createApp({})
 
 app.component('departments' , Departments);
