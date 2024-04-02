@@ -24,11 +24,12 @@
                                     <td>{{department.name}}</td>
                                     <td>{{department.director_id}}</td>
                                     <td>
-                                          <button class="btn btn-success" @click="editDepartment(department)"><i class="fa fa-edit"> </i></button>
+                                       <button class="btn btn-success mx-1" @click="editDepartment(department)"><i class="fa fa-edit"> </i></button>
                                     </td>
-                                    <td>
-                                          <button class="btn btn-failed" @click="editDepartment(department)"><i class="fa fa-delete"> </i></button>
+                                   <td>
+                                        <button class="btn btn-danger mx-1" @click="deleteDepartment(department)"><i class="fa fa-trash"></i></button>
                                     </td>
+                                   
                                  </tr>
                               </tbody>
                     </table>
@@ -124,6 +125,15 @@
                this.getDepartments()
                $('#exampleModal').modal('hide');
             });
+         },
+         deleteDepartment(department){
+            if(confirm('Are you sure you want to delete department!!?')){
+                  axios.post(window.url + 'api/deleteDepartment/' + department.id)
+                  .then((response) => {
+                     this.getDepartments()
+                     $('#exampleModal').modal('hide');
+                  });
+            }
          },
 
        },
