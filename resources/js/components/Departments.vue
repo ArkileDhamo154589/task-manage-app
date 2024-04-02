@@ -5,7 +5,7 @@
          <div class="card">
             <div class="card-header bg-dark">
                <h5 class="float-start text-light"> Departments List </h5>
-               <button class="btn btn-success float-end" @click="createDepartment"> Create new Department</button>
+               <button class="btn btn-success float-end" @click="createDepartment">  New Department</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -19,13 +19,18 @@
                                 </tr>
                         </thead>
                             <tbody>
-                                <tr v-for="(department, index) in departments" :key="index">
+                                 <tr v-for="(department, index) in departments" :key="index">
                                     <td>{{index + 1}}</td>
                                     <td>{{department.name}}</td>
                                     <td>{{department.director_id}}</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
+                                    <td>
+                                          <button class="btn btn-success" @click="editDepartment(department)"><i class="fa fa-edit"> </i></button>
+                                    </td>
+                                    <td>
+                                          <button class="btn btn-failed" @click="editDepartment(department)"><i class="fa fa-delete"> </i></button>
+                                    </td>
+                                 </tr>
+                              </tbody>
                     </table>
                 </div>
 
@@ -34,7 +39,7 @@
                   <div class="modal-dialog modal-dialog-centered">
                      <div class="modal-content">
                         <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                           <h5 class="modal-title" id="exampleModalLabel">{{!editMode ? 'Create Department' : 'Update Department'}}</h5>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -59,7 +64,8 @@
                         </div>
                         <div class="modal-footer">
                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                           <button type="button" @click="storeDepartment" class="btn btn-success">Store</button>
+                           <!-- We check here if the editMode is false then run the store function else run the update function -->
+                           <button type="button" @click="!editMode ? storeDepartment() : updateDepartment()" class="btn btn-success">{{!editMode ? 'Store' : 'Update'}}</button>
                         </div>
                      </div>
                   </div>
@@ -73,9 +79,10 @@
    export default {
        data() {
            return {
+            editMode : false, //i create this object , and i declare it in my function , after that i check if is true or false to change the text of my modal
             departments: {},
-            //we put our data in object
              departmentData : {
+                id: '',
                 name: '',
                 director_id: '',
              }
@@ -89,15 +96,36 @@
                 })
             },
            createDepartment(){
+            this.editMode = false
             this.departmentData.name = this.departmentData.direcotr_id = ''
+              this.getDepartments()
               $('#exampleModal').modal('show')
            },
+           editDepartment(department){
+            this.editMode = true
+            this.departmentData.id = department.id
+            this.departmentData.name = department.name
+            this.departmentData.direcotr_id = department.direcotr_id
+              $('#exampleModal').modal('show')
+           },
+           
            storeDepartment(){
                 axios.post(window.url + 'api/storeDepartment' , this.departmentData)
                     .then((response) => {
+                        this.getDepartments()
                         $('#exampleModal').modal('hide')
                     });
            },
+           updateDepartment() {
+            // we put / because after url need it for the id
+            axios.post(window.url + 'api/updateDepartment/' + this.departmentData.id, this.departmentData)
+            .then((response) => {
+               //we call getDepartments function because we need to see the updated changes
+               this.getDepartments()
+               $('#exampleModal').modal('hide');
+            });
+         },
+
        },
        mounted() {
         //we bring this every time that our page reload

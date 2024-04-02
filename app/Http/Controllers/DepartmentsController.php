@@ -29,6 +29,16 @@ class DepartmentsController extends Controller
         return response()->json('success');
     }
 
+    public function updateDepartment(Request $request , $id){
+       //we need to update it based on id
+       Department::where('id',$id)->update([
+        'director_id' => $request->director_id,
+        'name' => $request->name,
+       ]);
+
+        return response()->json('success');
+    }
+
     // bellow code is related to laravel crud
     public function index()
     {
