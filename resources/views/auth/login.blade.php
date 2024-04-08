@@ -9,15 +9,25 @@
                     <h5 class="text-center text-light">Login </h5>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{route('login')}}" method="POST">
                         @csrf
                         <div class="form-group my-1">
                             <label for="email">Email</label>
-                            <input type="email" name="email" class="form-control">
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Email Address">
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
                         </div>
                         <div class="form-group my-1">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{old('password')}}" placeholder="Password"> 
+                            @error('password')
+                                <span class="invalid-feedback">
+                                    <strong>{{$message}} </strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="row">
                             <div class="col-md-6">

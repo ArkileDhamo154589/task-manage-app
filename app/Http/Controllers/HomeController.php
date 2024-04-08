@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    function __construct() {
+        $this ->middleware('auth');
+    }
+
     //return view from here 
     public function dashboard()
     {
