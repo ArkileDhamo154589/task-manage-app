@@ -32,6 +32,10 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(function(){
             return view('auth.login');
         });
+        //we have to declare also the register view 
+        Fortify::registerView(function(){
+            return view('auth.register');
+        });
         //this is the fortify user auth
         Fortify::authenticateUsing(function(Request $request){
             $user = User::where('email' , $request->email)->first();
@@ -40,10 +44,13 @@ class FortifyServiceProvider extends ServiceProvider
                 return $user;
             }
         });
-        //we have to declare also the register view 
-        Fortify::registerView(function(){
-            return view('auth.register');
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.forgot-password');
         });
+        Fortify::resetPasswordView(function (Request $request) {
+            return view('auth.reset-password', ['request' => $request]);
+        });
+    
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);

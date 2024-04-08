@@ -30,6 +30,13 @@
                             @enderror
                         </div>
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group my-1">
+                                    <a href="{{route('password.request')}}"> Forgot Password</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group my-1">
                                    <button type="submit" class="btn btn-warning float-start">Login </button>
