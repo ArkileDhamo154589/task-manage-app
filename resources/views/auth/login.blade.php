@@ -13,7 +13,7 @@
                         @csrf
                         <div class="form-group my-1">
                             <label for="email">Email</label>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Email Address">
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Email Address" required>
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group my-1">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{old('password')}}" placeholder="Password"> 
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{old('password')}}" placeholder="Password" required> 
                             @error('password')
                                 <span class="invalid-feedback">
                                     <strong>{{$message}} </strong>
