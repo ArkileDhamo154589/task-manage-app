@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Session;
 
 class DepartmentsController extends Controller
 {
-    // bellow is related to vue js crud
 
+    // function __construct() 
+    // {
+    //     $this ->middleware('auth:api');
+    // }
+    // bellow is related to vue js crud
     public function getDepartments()
     {
         //with this we bring the latests
