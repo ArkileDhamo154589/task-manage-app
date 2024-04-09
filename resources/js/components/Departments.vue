@@ -8,6 +8,9 @@
                <button class="btn btn-success float-end" @click="createDepartment">  New Department</button>
             </div>
             <div class="card-body">
+            <button @click="testAction" class="btn btn-info"> Test </button>
+           <!-- echo the data of the test -->
+            {{test}}
                 <div class="table-responsive">
                     <table class="table table-hover text-center">
                         <thead>
@@ -161,11 +164,20 @@
                   });
             }
          },
+         testAction(){
+            this.$store.dispatch('testAction')
+         }
 
        },
        mounted() {
         //we bring this every time that our page reload
           this.getDepartments()
+          this.$store.dispatch('testAction')
        },
+       computed: {
+         test(){
+            return this.$store.getters.test
+         }
+       }
    }
 </script>

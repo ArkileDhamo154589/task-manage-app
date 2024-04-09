@@ -43,10 +43,10 @@ return [
         /*
         We need also our api guard
         */
-        
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 

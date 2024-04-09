@@ -7,7 +7,7 @@ Do not forget to compile all changes
 
 import {createApp} from 'vue'
 //Import Departments component
-
+import { store } from './store/store';
 import Departments from './components/Departments.vue';
 
 //import v-form 
@@ -22,4 +22,5 @@ app.component('departments' , Departments);
 
 window.url = '/'
 
+app.use(store);
 app.mount('#app')
