@@ -5,12 +5,9 @@
          <div class="card">
             <div class="card-header bg-dark">
                <h5 class="float-start text-light"> Departments List </h5>
-               <button class="btn btn-success float-end" @click="createDepartment">  New Department</button>
+               <button class="btn btn-success float-end" @click="createDepartment" >  New Department</button>
             </div>
             <div class="card-body">
-            <button @click="testAction" class="btn btn-info"> Test </button>
-           <!-- echo the data of the test -->
-            {{test}}
                 <div class="table-responsive">
                     <table class="table table-hover text-center">
                         <thead>
@@ -93,7 +90,7 @@
        data() {
            return {
             editMode : false, //i create this object , and i declare it in my function , after that i check if is true or false to change the text of my modal
-            departments: {},
+            
              departmentData: new Form ({
                 id: '',
                 name: '',
@@ -108,16 +105,11 @@
            }
        },
        methods: {
-            getDepartments(){
-                axios.get(`${window.url}api/getDepartments`).then((response) =>{
-                    console.log(response.data)
-                    this.departments = response.data
-                })
-            },
+
            createDepartment(){
             this.editMode = false
             this.departmentData.name = this.departmentData.direcotr_id = ''
-              this.getDepartments()
+            //   this.getDepartments()
               $('#exampleModal').modal('show')
            },
            editDepartment(department){
@@ -129,40 +121,13 @@
            },
            
            storeDepartment(){
-               // Check if the fields are empty
-               // this.departmentErrors.name = !this.departmentData.name
-               // this.departmentErrors.direcotr_id = !this.departmentData.direcotr_id
-               
-               // if(!this.departmentErrors.name && !this.departmentErrors.direcotr_id){
-                  this.departmentData.post(window.url + 'api/storeDepartment')
-                        .then((response) => {
-                           this.getDepartments()
-                           $('#exampleModal').modal('hide')
-                        });
-               //}
+                 this.$store.dispatch('storeDepartment' , this.departmentData)
             },
            updateDepartment() {
-            // we put / because after url need it for the id
-            // this.departmentErrors.name = !this.departmentData.name
-            //    this.departmentErrors.direcotr_id = !this.departmentData.direcotr_id
-               
-            //    if(!this.departmentErrors.name && !this.departmentErrors.direcotr_id){
-                   this.departmentData.post(window.url + 'api/updateDepartment/' + this.departmentData.id)
-                     .then((response) => {
-                        //we call getDepartments function because we need to see the updated changes
-                        this.getDepartments()
-                        $('#exampleModal').modal('hide');
-                     });
-               // }
-         },
+               this.$store.dispatch('updateDepartment', this.departmentData)
+            },
          deleteDepartment(department){
-            if(confirm('Are you sure you want to delete department!!?')){
-                  axios.post(window.url + 'api/deleteDepartment/' + department.id)
-                  .then((response) => {
-                     this.getDepartments()
-                     $('#exampleModal').modal('hide');
-                  });
-            }
+            this.$store.dispatch('deleteDepartment', department)
          },
          testAction(){
             this.$store.dispatch('testAction')
@@ -170,13 +135,21 @@
 
        },
        mounted() {
-        //we bring this every time that our page reload
-          this.getDepartments()
-          this.$store.dispatch('testAction')
+         console.log(window.auth_roles)
+         console.log(window.auth_permissions)
+         this.$store.dispatch('getDepartments')
+         this.$store.dispatch('getAuthRolesAndPermissions')
+          
        },
        computed: {
-         test(){
-            return this.$store.getters.test
+         departments() {
+            return this.$store.getters.departments
+         },
+         current_permissions() {
+            return this.$store.getters.current_permissions
+         },
+         current_roles() {
+            return this.$store.getters.current_roles
          }
        }
    }
