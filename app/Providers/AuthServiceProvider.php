@@ -26,10 +26,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        //create our gates
         try {
             // all auth user role gates
             $roles = Role::all();
+            //for auth users we create a gate
             foreach ($roles as $role) {
                 Gate::define($role->name, function ($user) use ($role) {
                     return $user->hasRole($role->name); 

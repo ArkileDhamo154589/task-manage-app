@@ -69,7 +69,7 @@ class LaratrustSeeder extends Seeder
                     'password' => bcrypt('password')
                 ]);
                 $user->attachRole($role);
-                $role->permissions()->sync($permissions);
+                $user->permissions()->sync($permissions);
             }
 
         }

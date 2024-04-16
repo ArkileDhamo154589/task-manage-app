@@ -5,7 +5,8 @@
          <div class="card">
             <div class="card-header bg-dark">
                <h5 class="float-start text-light"> Departments List </h5>
-               <button class="btn btn-success float-end" @click="createDepartment" >  New Department</button>
+               <button class="btn btn-success float-end" @click="createDepartment" 
+               v-if="current_permissions.has('departments-update')">  New Department</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -15,7 +16,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Director</th>
-                                    <th>Actions</th>
+                                    <th v-if="current_permissions.has('departments-update') || current_permissions.has('departments-delete')">Actions</th>
                                 </tr>
                         </thead>
                             <tbody>
@@ -23,10 +24,10 @@
                                     <td>{{index + 1}}</td>
                                     <td>{{department.name}}</td>
                                     <td>{{department.director_id}}</td>
-                                    <td>
+                                    <td v-if="current_permissions.has('departments-update') || current_permissions.has('departments-delete')">
                                        <button class="btn btn-success mx-1" @click="editDepartment(department)"><i class="fa fa-edit"> </i></button>
                                     </td>
-                                   <td>
+                                   <td v-if="current_permissions.has('departments-update') || current_permissions.has('departments-delete')">
                                         <button class="btn btn-danger mx-1" @click="deleteDepartment(department)"><i class="fa fa-trash"></i></button>
                                     </td>
                                    
@@ -120,18 +121,18 @@
               $('#exampleModal').modal('show')
            },
            
-           storeDepartment(){
-                 this.$store.dispatch('storeDepartment' , this.departmentData)
-            },
-           updateDepartment() {
-               this.$store.dispatch('updateDepartment', this.departmentData)
-            },
-         deleteDepartment(department){
-            this.$store.dispatch('deleteDepartment', department)
-         },
-         testAction(){
-            this.$store.dispatch('testAction')
-         }
+            storeDepartment(){
+                  this.$store.dispatch('storeDepartment' , this.departmentData)
+               },
+            updateDepartment() {
+                  this.$store.dispatch('updateDepartment', this.departmentData)
+               },
+            deleteDepartment(department){
+                  this.$store.dispatch('deleteDepartment', department)
+               },
+            testAction(){
+                  this.$store.dispatch('testAction')
+               }
 
        },
        mounted() {
@@ -147,6 +148,7 @@
          },
          current_permissions() {
             return this.$store.getters.current_permissions
+            
          },
          current_roles() {
             return this.$store.getters.current_roles
