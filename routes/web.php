@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 //Import Controller
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
-
-
+use App\Http\Controllers\RoleController;
+use Laratrust\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +27,15 @@ Route::post('departments/store' ,[DepartmentsController::class , 'store'])->name
 Route::get('departments/edit/{id}' ,[DepartmentsController::class , 'edit'])->name('departmentsEdit');
 Route::post('departments/update/{id}' ,[DepartmentsController::class , 'update'])->name('departmentsUpdate');
 Route::post('departments/delete/{id}' ,[DepartmentsController::class , 'delete'])->name('departmentsDelete');
+
+
 Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
+
+Route::get('roles/index', [RoleController::class, 'index'])->name('rolesIndex');
+Route::get('roles/create', [RoleController::class, 'create'])->name('rolesCreate');
+Route::get('roles/edit/{id}', [RoleController::class, 'edit'])->name('rolesEdit');
+Route::post('roles/delete/{id}' , [RoleController::class , 'delete'])->name('rolesDelete');
+Route::post('roles/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate');
+Route::post('roles/store', [RoleController::class, 'store'])->name('rolesStore');
+
 

@@ -25,29 +25,29 @@
                 </a>
                 <ul class="list-unstyled components mb-5">
                     @can('admin')
-                    <li class="active">
-                        <a href="#homeSubmenu" data-bs-toggle="collapse"  role="button" aria-expanded="false"
+                    <li class="{{ Request::is('departments/index' , 'users/index' , 'roles/index' , 'permissions/index') ? 'active' : ''}}">
+                        <a href="#homeSubmenu" data-bs-toggle="collapse"  role="button" aria-expanded="{{ Request::is('departments/index' , 'users/index' , 'roles/index' , 'permissions/index') ? 'true' : 'false'}}"
                             aria-controls="homeSubmenu">Management
                         <i class = "fa fa-angle-down float-end mt-2"></i>
                         </a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <ul class="collapse list-unstyled {{ Request::is('departments/index' , 'users/index' , 'roles/index' , 'permissions/index') ? 'show' : ''}}" id="homeSubmenu">
                             @can('departments-read')
-                            <li>
+                            <li class="{{ Request::is('departments/index')  ? 'active' : '' }}">
                                 <a href="{{ route('departmentsIndex') }}">Departments</a>
                             </li>
                             @endcan
                             @can('users-read')
-                            <li>
+                            <li class="{{ Request::is('users/index')  ? 'active' : '' }}">
                                 <a href="{{ route('usersIndex') }}">Users</a>
                             </li>
                             @endcan
                             @can('roles-read')
-                            <li>
-                                <a href="#">Roles</a>
+                            <li class="{{ Request::is('roles/index')  ? 'active' : '' }}">
+                                <a href="{{ route('rolesIndex')}}">Roles</a>
                             </li>
                             @endcan
                             @can('permissions-read')
-                            <li>
+                            <li class="{{ Request::is('permissions/index')  ? 'active' : '' }}">
                                 <a href="#">Permissions</a>
                             </li>
                             @endcan
