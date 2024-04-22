@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use Laratrust\Http\Controllers\RolesController;
 
 /*
@@ -28,14 +29,18 @@ Route::get('departments/edit/{id}' ,[DepartmentsController::class , 'edit'])->na
 Route::post('departments/update/{id}' ,[DepartmentsController::class , 'update'])->name('departmentsUpdate');
 Route::post('departments/delete/{id}' ,[DepartmentsController::class , 'delete'])->name('departmentsDelete');
 
-
-Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
-
 Route::get('roles/index', [RoleController::class, 'index'])->name('rolesIndex');
 Route::get('roles/create', [RoleController::class, 'create'])->name('rolesCreate');
 Route::get('roles/edit/{id}', [RoleController::class, 'edit'])->name('rolesEdit');
 Route::post('roles/delete/{id}' , [RoleController::class , 'delete'])->name('rolesDelete');
 Route::post('roles/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate');
 Route::post('roles/store', [RoleController::class, 'store'])->name('rolesStore');
+
+Route::get('permissions/index' , [PermissionController::class , 'index'])->name('permissionsIndex');
+Route::get('permissions/create' , [PermissionController::class , 'create'])->name('permissionsCreate');
+Route::post('permissions/store' , [PermissionController::class, 'store'])->name('permissionStore');
+Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
+
+
 
 
