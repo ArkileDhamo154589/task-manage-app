@@ -39,6 +39,9 @@ Route::post('roles/store', [RoleController::class, 'store'])->name('rolesStore')
 Route::get('permissions/index' , [PermissionController::class , 'index'])->name('permissionsIndex');
 Route::get('permissions/create' , [PermissionController::class , 'create'])->name('permissionsCreate');
 Route::post('permissions/store' , [PermissionController::class, 'store'])->name('permissionStore');
+Route::get('permissions/edit/{id}', [PermissionController::class, 'edit'])->name('permissionsEdit');
+Route::post('permissions/update/{id}', [PermissionController::class, 'update'])->name('permissionUpdate');
+Route::post('permissions/delete/{id}' , [PermissionController::class , 'delete'])->name('permissionDelete');
 Route::get('users/index' , [UsersController::class, 'index'])->name('usersIndex');
 
 

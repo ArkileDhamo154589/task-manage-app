@@ -43,14 +43,14 @@
                                 <td>
                                     @can('roles-update')
                                     <div class="float-left mx-1">
-                                        <a href="{{route('rolesEdit' , $per->id)}}" class="btn btn-success ">
+                                        <a href="{{route('permissionsEdit' , $per->id)}}" class="btn btn-success ">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </div>
                                     @endcan
                                     @can('permissions-update')
                                     <div class="float-left mx-1">
-                                        <form action="{{ route('rolesDelete', $per->id)}}" method="POST">
+                                        <form action="{{ route('permissionDelete', $per->id)}}" method="POST">
                                             @csrf
                                             <button class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>

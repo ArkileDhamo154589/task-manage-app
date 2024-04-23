@@ -26,6 +26,7 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "jquery": "^3.7.1",
+        "sweetalert2": "^11.10.8",
         "vform": "^2.1.2",
         "vuex": "^4.0.2"
     }
