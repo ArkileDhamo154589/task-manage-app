@@ -28,3 +28,4 @@ Route::post('deleteDepartment/{id}', [DepartmentsController::class, 'deleteDepar
 
 Route::get('getAllDepartments', [ApiController::class, 'getAllDepartments']);
 Route::get('getAllRoles', [ApiController::class, 'getAllRoles']);
+Route::get('getAllPermissions', [ApiController::class, 'getAllPermissions']);

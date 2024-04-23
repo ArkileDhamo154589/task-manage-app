@@ -162,14 +162,16 @@
 
        },
        mounted() {
-         console.log(window.auth_roles)
-         console.log(window.auth_permissions)
          this.$store.dispatch('getAllDepartments')
          this.$store.dispatch('getAllRoles')
          this.$store.dispatch('getAuthRolesAndPermissions')
+         this.$store.dispatch('getAllPermissions')
           
        },
        computed: {
+           filtered_permission_categories() {
+                return this.$store.getters.filtered_permission_categories
+            },
          filtered_roles() { 
             return this.$store.getters.filtered_roles;
         },

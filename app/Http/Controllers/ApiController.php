@@ -18,4 +18,8 @@ class ApiController extends Controller
     {
         return response()->json(Role::all());
     }
+    public function getAllPermissions()
+    {
+        return response()->json(Permission::all());
+    }
 }
