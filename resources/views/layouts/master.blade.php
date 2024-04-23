@@ -36,11 +36,7 @@
                                 <a href="{{ route('departmentsIndex') }}">Departments</a>
                             </li>
                             @endcan
-                            @can('users-read')
-                            <li class="{{ Request::is('users/index')  ? 'active' : '' }}">
-                                <a href="{{ route('usersIndex') }}">Users</a>
-                            </li>
-                            @endcan
+                      
                             @can('roles-read')
                             <li class="{{ Request::is('roles/index')  ? 'active' : '' }}">
                                 <a href="{{ route('rolesIndex')}}">Roles</a>
@@ -49,6 +45,11 @@
                             @can('permissions-read')
                             <li class="{{ Request::is('permissions/index')  ? 'active' : '' }}">
                                 <a href="{{route('permissionsIndex')}}">Permissions</a>
+                            </li>
+                            @endcan
+                            @can('users-read')
+                            <li class="{{ Request::is('users/index')  ? 'active' : '' }}">
+                                <a href="{{ route('usersIndex') }}">Users</a>
                             </li>
                             @endcan
                         </ul>

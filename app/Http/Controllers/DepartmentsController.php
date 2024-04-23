@@ -26,12 +26,12 @@ class DepartmentsController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'director_id' => ['required']
+            
         ]);
         //we need our model
         Department::create([
             'user_id' => 1,
-            'director_id' => $request->director_id,
+    
             'name' => $request->name,
         ]);
 
@@ -42,11 +42,10 @@ class DepartmentsController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'director_id' => ['required']
+         
         ]);
         //we need to update it based on id
         Department::where('id', $id)->update([
-            'director_id' => $request->director_id,
             'name' => $request->name,
         ]);
 
@@ -81,13 +80,12 @@ class DepartmentsController extends Controller
 
         $request->validate([
             'name' => ['required'],
-            'director_id' => ['required']
+       
         ]);
 
         //we need our model
         Department::create([
             'user_id' => 1,
-            'director_id' => $request->director_id,
             'name' => $request->name,
         ]);
         Session::flash('success-message', 'Department Created Successfully!!');
@@ -104,11 +102,10 @@ class DepartmentsController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'director_id' => ['required']
+            
         ]);
         //we updte the director id and name
         Department::where('id', $id)->update([
-            'director_id' => $request->director_id,
             'name' => $request->name,
         ]);
         Session::flash('success-message', 'Department Updated Successfully!!');
@@ -118,7 +115,7 @@ class DepartmentsController extends Controller
     {
 
         Department::where('id', $id)->delete([
-            'director_id' => $request->director_id,
+           
             'name' => $request->name,
         ]);
         Session::flash('success-message', 'Department Deleted Successfully!!');
