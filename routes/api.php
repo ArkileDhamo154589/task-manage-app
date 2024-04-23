@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::post('storeDepartment', [DepartmentsController::class, 'storeDepartment']
 Route::get('getDepartments', [DepartmentsController::class, 'getDepartments']);
 Route::post('updateDepartment/{id}', [DepartmentsController::class, 'updateDepartment']);
 Route::post('deleteDepartment/{id}', [DepartmentsController::class, 'deleteDepartment']);
+
+Route::get('getAllDepartments', [ApiController::class, 'getAllDepartments']);
+Route::get('getAllRoles', [ApiController::class, 'getAllRoles']);

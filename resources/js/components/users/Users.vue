@@ -36,45 +36,78 @@
 
                <!-- Modal -->
                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                     <div class="modal-content">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
                         <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLabel">{{!editMode ? 'Create User' : 'Update User'}}</h5>
-                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{!editMode ? 'Create User' : 'Update User'}}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                           <div class="row">
-                              <div class="col-md-3">
-                                <label for="name"> Name </label>
-                                <input type="text" class="form-control" v-model="userData.name">
-                                <div class="text-danger" v-if="userData.errors.has('name')" v-html="userData.errors.get('name')"></div>
-                              </div>
-                              <div class="col-md-3">
-                                <label for="email"> Email </label>
-                                <input type="email" class="form-control" v-model="userData.name">
-                                <div class="text-danger" v-if="userData.errors.has('email')" v-html="userData.errors.get('email')"></div>
-                              </div>
-                              <div class="col-md-3">
-                                <label for="password"> Password </label>
-                                <input type="password" class="form-control" v-model="userData.name">
-                                <div class="text-danger" v-if="userData.errors.has('password')" v-html="userData.errors.get('password')"></div>
-                              </div>
-                              <div class="col-md-3">
-                                <label for="department_id"> Department </label>
-                                <!-- Vue multiselect -->
-                                <multi-select :options="filtered_departments" v-model="userData.department_id" :searchable="true"> </multi-select>
-                                <div class="text-danger" v-if="userData.errors.has('name')" v-html="userData.errors.get('name')"></div>
-                              </div>
-                           </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" v-model="userData.name">
+                                        <div class="text-danger" v-if="userData.errors.has('name')" v-html="userData.errors.get('name')"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" v-model="userData.email">
+                                        <div class="text-danger" v-if="userData.errors.has('email')" v-html="userData.errors.get('email')"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" v-model="userData.password">
+                                        <div class="text-danger" v-if="userData.errors.has('password')" v-html="userData.errors.get('password')"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="department_id">Department</label>
+                                        <multi-select :options="filtered_departments" v-model="userData.department_id" :searchable="true"></multi-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="selected_roles">Roles</label>
+                                        <multi-select :options="filtered_roles" v-model="userData.selected_roles" :searchable="true" mode="tags"></multi-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="permission_categories">Permission Categories</label>
+                                        <multi-select :options="filtered_permission_categories" v-model="userData.selected_permission_categories" :searchable="true" mode="tags" @input="getFilteredPermissions"></multi-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="filtered_permissions">Permissions</label>
+                                        <multi-select :options="filtered_permissions" v-model="userData.selected_permissions" :searchable="true" mode="tags"></multi-select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                           <!-- We check here if the editMode is false then run the store function else run the update function -->
-                           <button type="button" @click="!editMode ? storeUser() : updateUser()" class="btn btn-success">{{!editMode ? 'Store' : 'Update'}}</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" @click="!editMode ? storeUser() : updateUser()" class="btn btn-success">
+                                {{!editMode ? 'Store' : 'Save Changes'}}
+                            </button>
                         </div>
-                     </div>
-                  </div>
-               </div>
+                        </div>
+                    </div>
+                    </div>
             </div>
          </div>
       </div>
@@ -91,6 +124,9 @@
                 name: '',
                 email:'',
                 password: '',
+                selected_roles: [],
+                selected_permissions_categories:[],
+                selected_permissions:[],
              }),
           
 
@@ -128,12 +164,19 @@
        mounted() {
          console.log(window.auth_roles)
          console.log(window.auth_permissions)
-         this.$store.dispatch('getusers')
+         this.$store.dispatch('getAllDepartments')
+         this.$store.dispatch('getAllRoles')
          this.$store.dispatch('getAuthRolesAndPermissions')
           
        },
        computed: {
-
+         filtered_roles() { 
+            return this.$store.getters.filtered_roles;
+        },
+         filtered_departments() { 
+            return this.$store.getters.filtered_departments;
+        },
+        
          current_permissions() {
             return this.$store.getters.current_permissions
             

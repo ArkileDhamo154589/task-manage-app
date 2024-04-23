@@ -1,11 +1,13 @@
 import { createStore } from "vuex";
 
 import departmentsModule from './modules/departments';
+import apidatamodule from './modules/apidata';
 
 export const store = createStore({
     strict: true,
     modules: {
         departmentsModule,
+        apidatamodule,
       
     },
     state: {
