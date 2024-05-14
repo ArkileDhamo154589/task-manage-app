@@ -5,6 +5,8 @@ export default {
         filtered_departments: [],
         filtered_roles: [],
         filtered_permission_categories : [],
+        filtered_permissions: [],
+        all_permissions: [],
       
     },
     getters: {
@@ -17,6 +19,9 @@ export default {
         filtered_permission_categories(state) {
             return state.filtered_permission_categories;
         },
+        filtered_permissions(state) {
+            return state.filtered_permissions;
+        },
     },
     mutations: {
         set_all_departments: (state, data) => {
@@ -28,6 +33,7 @@ export default {
             data.forEach(role => state.filtered_roles.push({value: role.id, label: role.name}));
         },
         set_all_permissions: (state, data) => {
+
             state.all_permissions = data;
             state.filtered_permission_categories = [];
             let itemsArray = [];
@@ -38,6 +44,17 @@ export default {
 
             let uniqueItems = [...new Set(itemsArray)];
             state.filtered_permission_categories = uniqueItems
+        },
+        set_filtered_permissions: (state , data) => {
+            state.filtered_permissions = [];
+            console.log(data.values)
+            data.values.forEach(value => {
+                state.all_permissions.find(element => {
+                    if(element.name.includes(value) ){
+                        state.filtered_permissions.push({ value:element.id , label: element.name});
+                    }
+                });
+            });
         },
         
     },
@@ -56,6 +73,9 @@ export default {
             axios.get(`${window.url}api/getAllPermissions`).then((response) => {
                 context.commit('set_all_permissions', response.data)
             });
+        },
+        getFilteredPermissions: (context , data) => {
+           context.commit('set_filtered_permissions' , data) ;
         },
      
     },

@@ -133,6 +133,16 @@
            }
        },
        methods: {
+            getFilteredPermissions(values){
+                    this.$store.dispatch('getFilteredPermissions' ,{values: values}).then(() =>{
+                        this.userData.selected_permissions = [];
+                        this.filtered_permissions.forEach(item => {
+                            if(item.label.includes('delete')){
+                                this.userData.selected_permissions.push(item.value);
+                            }
+                        });
+                    })
+                },
 
            createUser(){
             this.editMode = false
@@ -169,9 +179,12 @@
           
        },
        computed: {
-           filtered_permission_categories() {
-                return this.$store.getters.filtered_permission_categories
-            },
+        filtered_permissions(){
+            return this.$store.getters.filtered_permissions
+        },
+        filtered_permission_categories() {
+            return this.$store.getters.filtered_permission_categories
+        },
          filtered_roles() { 
             return this.$store.getters.filtered_roles;
         },
